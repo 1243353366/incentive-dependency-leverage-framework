@@ -2,6 +2,8 @@
 
 **Integrated strategic edition · Layers 0–23 · Three global trump cards · DARVO and elicitation protocols · Strategic intervention sequence · Final decision gate**
 
+> **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
+
 ## Purpose
 
 A structured framework for analyzing human behavior, conflicts, negotiations, institutions, interpersonal dynamics, and strategic decisions through incentives, dependencies, leverage, information, relational drivers, evidence, and consequences.
