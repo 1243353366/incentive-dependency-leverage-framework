@@ -4,6 +4,45 @@
 
 > **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
 
+## Launching the app
+
+### Option 1 — GitHub Pages (already live)
+
+The app is already deployed from this repo's `main` branch:
+
+**https://1243353366.github.io/incentive-dependency-leverage-framework/**
+
+No install, no build step, nothing to run — open the URL and it works.
+
+### Option 2 — Launch it yourself from GitHub
+
+1. Open the repo in your browser: https://github.com/1243353366/incentive-dependency-leverage-framework
+2. Click **Code** → **Download ZIP**, then unzip it.
+3. Double-click `index.html`. The full app (library + decision coach) runs straight from the file. Your sessions save to that browser on that machine.
+
+### Option 3 — Fork it and publish your own copy
+
+1. Click **Fork** on the repo page (top right).
+2. In your fork, go to **Settings → Pages**.
+3. Under **Build and deployment**, set **Source** to *Deploy from a branch*, branch `main`, folder `/ (root)`, then **Save**.
+4. Wait ~1–2 minutes, then refresh the Pages screen — your live URL appears at the top (it will be `https://<your-username>.github.io/incentive-dependency-leverage-framework/`).
+
+### For developers
+
+```bash
+git clone https://github.com/1243353366/incentive-dependency-leverage-framework.git
+cd incentive-dependency-leverage-framework
+npx serve .        # or: python3 -m http.server 8080
+```
+
+Then open http://localhost:8080. It's a fully static app — no dependencies, no build step, no backend. All data stays in your browser's local storage.
+
+## License
+
+MIT — see [LICENSE](LICENSE). Use it, fork it, remix it; just keep the license text.
+
+---
+
 ## Purpose
 
 A structured framework for analyzing human behavior, conflicts, negotiations, institutions, interpersonal dynamics, and strategic decisions through incentives, dependencies, leverage, information, relational drivers, evidence, and consequences.
