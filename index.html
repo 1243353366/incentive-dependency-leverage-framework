@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leverage Lens — Incentive–Dependency–Leverage Strategic Analysis Framework</title>
+<meta name="description" content="A searchable reference and interactive decision coach built on the Incentive–Dependency–Leverage Strategic Analysis Framework.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="brand">
+      <span class="brand-mark">⚖</span>
+      <div>
+        <h1>Leverage Lens</h1>
+        <p>Incentive–Dependency–Leverage Strategic Analysis Framework</p>
+      </div>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button id="tab-library" class="tab active" role="tab">📚 Library</button>
+      <button id="tab-coach" class="tab" role="tab">🧭 Decision Coach</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <!-- LIBRARY -->
+  <section id="view-library" class="view active">
+    <div class="search-wrap">
+      <input id="search-input" type="search" placeholder="Search the framework… (e.g. “DARVO”, “exit costs”, “elicitation”, “what do I actually know”)" autocomplete="off">
+      <div id="search-meta" class="search-meta">Browse all 24 layers, 8 intervention steps, 3 trump cards, and the governing principles — or search.</div>
+    </div>
+    <div id="library-content"></div>
+  </section>
+
+  <!-- COACH -->
+  <section id="view-coach" class="view">
+    <div class="coach-layout">
+      <aside class="coach-side">
+        <div class="coach-side-card">
+          <label for="session-select">Sessions</label>
+          <select id="session-select"></select>
+          <div class="coach-side-actions">
+            <button id="btn-new-session" class="btn small">New session</button>
+            <button id="btn-delete-session" class="btn small danger">Delete</button>
+          </div>
+          <div id="session-progress" class="progress-wrap"></div>
+        </div>
+        <div class="coach-side-card notes-card">
+          <h3>Session notes</h3>
+          <div id="session-notes"></div>
+        </div>
+      </aside>
+      <div class="coach-main">
+        <div id="safety-banner" class="banner hidden"></div>
+        <div id="coach-report" class="report hidden"></div>
+        <div id="coach-chat"></div>
+        <div id="coach-input-wrap" class="coach-input-wrap hidden">
+          <textarea id="coach-input" rows="4" placeholder="Type your answer…"></textarea>
+          <div class="coach-input-actions">
+            <button id="btn-back" class="btn small ghost">← Back</button>
+            <div class="spacer"></div>
+            <div id="input-hint" class="input-hint"></div>
+            <button id="btn-skip" class="btn small ghost">Skip</button>
+            <button id="btn-submit" class="btn small">Continue →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>Sound judgment, effective action, defensible consequences. <em>Just because you can doesn't mean you should.</em>
+  &nbsp;·&nbsp; <a href="https://github.com/1243353366/incentive-dependency-leverage-framework" target="_blank" rel="noopener">Source on GitHub</a></p>
+</footer>
+
+<script src="framework-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
