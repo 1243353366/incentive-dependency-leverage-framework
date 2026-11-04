@@ -56,8 +56,8 @@ already run things there.
 1. Sign in at [railway.com](https://railway.com/) and create a project from your fork.
 2. Add a start command: `npx serve -l $PORT .`
 3. Generate a domain under Settings → Networking.
-  Docs: [Railway quick start](https://docs.railway.com/quick-start)
-  Docs: [Railway documentation](https://docs.railway.com/)
+  Docs: [Railway quick start](https://docs.railway.com/quick-start) and the
+  [full documentation](https://docs.railway.com/)
 
 ### AWS
 
