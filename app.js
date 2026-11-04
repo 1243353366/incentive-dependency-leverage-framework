@@ -189,10 +189,6 @@ function switchTab(name) {
 document.getElementById('tab-library').addEventListener('click', () => switchTab('library'));
 document.getElementById('tab-coach').addEventListener('click', () => switchTab('coach'));
 document.getElementById('search-input').addEventListener('input', e => renderLibrary(e.target.value));
-const clearAll = document.getElementById('btn-clear-all');
-if (clearAll) clearAll.addEventListener('click', clearAllSessions);
-const storageNote = document.getElementById('storage-note');
-if (storageNote) storageNote.textContent = STORE.describe();
 
 /* jump from coach to a section */
 function jumpToSection(id) {
@@ -374,6 +370,14 @@ const RE = {
 /* ---------- state ---------- */
 const STORE = window.IDLFStorage;
 let sessions = [];
+
+// Bound here, not at the top of the file: STORE is a top-level const, so reading it before its
+// declaration throws and stops every handler below it from ever being attached. That shipped
+// once, in commit 240f7b2, and the page was dead until this line moved.
+const clearAllButton = document.getElementById('btn-clear-all');
+if (clearAllButton) clearAllButton.addEventListener('click', clearAllSessions);
+const storageNote = document.getElementById('storage-note');
+if (storageNote) storageNote.textContent = STORE.describe();
 let session = null;
 
 const DYN_QUESTIONS = {};

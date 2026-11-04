@@ -2,6 +2,26 @@
 
 ## Unreleased
 
+### Fixed
+
+- **The page was dead, shipped in 240f7b2** (`app.js`). The retention commit bound a control
+  near the top of the file that read `const STORE`, declared further down. Top-level consts
+  live in a temporal dead zone, so the read threw `ReferenceError` and every handler after it
+  was never attached. Unit tests and CI passed because nothing executed `app.js`. The binding
+  now sits beside the declaration it reads, and the shipped script is unchanged in behaviour.
+- **A load test now exists** (`tests/app-loads.test.js`): every script runs in a stubbed
+  document, so a fatal load error fails CI. This is the test that would have caught the above.
+
+### Added
+
+- **Layer 24 screen** (`layer24-ui.js`): third tab, own view, own storage key. Questions grouped
+  by section, exposures carrying their justification field inline, a status line that lists each
+  unmet gate requirement, and a plain-text export that omits unanswered questions, marks an
+  unstated justification as unstated, and strips angle brackets so a downloaded file carries no
+  markup.
+- **`switchTab` is data driven** (`app.js`): `VIEWS` list instead of an if/else, so a third tab
+  is one entry rather than a branch that silently shows the coach.
+
 ### Added
 
 - **Layer 24, actor analysis** (`layer24.js`, `docs/layer-24-actor-analysis.md`). 38 questions

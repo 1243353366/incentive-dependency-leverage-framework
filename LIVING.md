@@ -33,9 +33,17 @@ explanations, one disconfirming item, one provenance item, and both parts of the
 frame exist. Every operational question carries a second one: what decision changes if this is
 different.
 
-Not wired into the interface yet. The coach markup has not been touched, and shipping a tab
-without seeing it render is how a live page breaks. The engine and its tests are done; the
-screen is the next piece of work.
+Wired as a third tab (`layer24-ui.js`, own view, own storage key). The screen is a form and a
+status line: it reports what the gate says and cannot open it. Answers never leave the browser
+except through the export button.
+
+**A dead page shipped on 2026-11-04 and this is the record of it.** The retention commit bound a
+control near the top of `app.js` that read a `const` declared further down. Top-level consts sit
+in a temporal dead zone, so the read threw, and every handler after it was never attached. Unit
+tests passed, CI passed, and the page was dead for anyone who opened it. Nothing executed
+`app.js`, which is exactly the gap this document already named. `tests/app-loads.test.js` now
+runs every script in a stubbed document, so a script that cannot finish loading fails CI instead
+of shipping.
 
 ## Open decisions
 
@@ -52,8 +60,9 @@ screen is the next piece of work.
 
 ## Known limits
 
-- No test executes the app. The suite reads the data and greps the source; the coach's
-  behaviour on a real decision path is unverified by machine.
+- No test drives the app. Scripts are loaded in a stubbed document now, so a fatal load error
+  is caught, but the coach's behaviour on a real decision path and every click path remain
+  unverified by machine. A headless browser is the missing instrument.
 - The escaping guards assert that `esc()` is applied where it is applied today. A new
   interpolation elsewhere would need `make audit` and a human reading it.
 - The framework names adversarial tactics (DARVO, elicitation). Published without context,
@@ -62,6 +71,8 @@ screen is the next piece of work.
 ## Change log of this document
 
 - 2026-11-04 created, alongside the first test suite and the CSP.
+- 2026-11-04 layer 24 screen wired, and the app.js temporal dead zone that killed the page
+  fixed, with a load test so it cannot happen quietly again.
 - 2026-11-04 layer 24 added: actor analysis with a gate, engine and tests only.
 - 2026-11-04 retention bounded: versioned key, 90 day prune, clear-all control, legacy key
   migrated. Decided against a JavaScript frame-buster: it is trivially bypassed, it breaks
