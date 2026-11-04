@@ -4,6 +4,12 @@
 
 > **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
 
+## Layer 24: actor analysis
+
+The final layer is aimed at a person rather than a decision, so it is the one with a gate:
+five alternative explanations, one disconfirming item, provenance, and your own goal and risk
+appetite before any conclusion opens. See [`docs/layer-24-actor-analysis.md`](docs/layer-24-actor-analysis.md).
+
 ## Where it stands
 
 [`LIVING.md`](LIVING.md) is the current state: what is checked, what has been

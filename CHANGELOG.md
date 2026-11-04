@@ -2,6 +2,18 @@
 
 ## Unreleased
 
+### Added
+
+- **Layer 24, actor analysis** (`layer24.js`, `docs/layer-24-actor-analysis.md`). 38 questions
+  across ten sections, sorted into three kinds: evidence, interpretation, and operational
+  (where a person is exposed). A conclusion stays blocked until five alternative explanations,
+  one disconfirming item, one provenance item, and the analyst's own goal and risk appetite
+  exist. Every operational answer requires a second answer naming the decision it would change;
+  without one it is flagged as a dossier entry, and the flag survives into the report.
+  `nextQuestion` asks evidence before temperament and keeps exposures last.
+- **Twelve tests** for the layer, including that four alternatives are not five, that a blank
+  answer is not an answer, and that an exposure with no decision attached stays flagged.
+
 ### Changed
 
 - **Session storage is versioned, bounded and clearable** (`storage.js`). Sessions moved to

@@ -25,6 +25,18 @@ If a claim here cannot be checked against the code or the tests in one command, 
   outcome data behind any layer. It is a structured way of asking questions, not a validated
   instrument. Saying otherwise would be the exact failure the framework warns about.
 
+## Layer 24, added 2026-11-04
+
+The actor analysis layer ships as data plus a gate (`layer24.js`), tested: 38 questions sorted
+into evidence, interpretation and operational, with a conclusion blocked until five alternative
+explanations, one disconfirming item, one provenance item, and both parts of the analyst's own
+frame exist. Every operational question carries a second one: what decision changes if this is
+different.
+
+Not wired into the interface yet. The coach markup has not been touched, and shipping a tab
+without seeing it render is how a live page breaks. The engine and its tests are done; the
+screen is the next piece of work.
+
 ## Open decisions
 
 - **Retention, resolved 2026-11-04.** Sessions now live under `idlf.sessions.v1`, are stamped
@@ -50,6 +62,7 @@ If a claim here cannot be checked against the code or the tests in one command, 
 ## Change log of this document
 
 - 2026-11-04 created, alongside the first test suite and the CSP.
+- 2026-11-04 layer 24 added: actor analysis with a gate, engine and tests only.
 - 2026-11-04 retention bounded: versioned key, 90 day prune, clear-all control, legacy key
   migrated. Decided against a JavaScript frame-buster: it is trivially bypassed, it breaks
   legitimate previews, and claiming clickjack protection from it would be worse than naming
