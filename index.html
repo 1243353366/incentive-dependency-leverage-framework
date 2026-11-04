@@ -22,6 +22,7 @@
     <nav class="tabs" role="tablist">
       <button id="tab-library" class="tab active" role="tab">📚 Library</button>
       <button id="tab-coach" class="tab" role="tab">🧭 Decision Coach</button>
+      <button id="tab-layer24" class="tab" role="tab">🔎 Actor analysis</button>
     </nav>
   </div>
 </header>
@@ -80,8 +81,23 @@
   &nbsp;·&nbsp; <a href="https://github.com/1243353366/incentive-dependency-leverage-framework" target="_blank" rel="noopener">Source on GitHub</a></p>
 </footer>
 
+    <section id="view-layer24" class="view">
+      <div class="l24-head">
+        <h2>Actor analysis</h2>
+        <p class="hint">Layer 24. Evidence before temperament, exposures last. A conclusion opens only after five alternative explanations, one disconfirming item and one provenance item, plus your own goal and risk appetite.</p>
+        <div class="l24-actions">
+          <button id="l24-export" class="btn small">Export as text</button>
+          <button id="l24-clear" class="btn small ghost">Clear answers</button>
+        </div>
+      </div>
+      <div id="l24-status" class="l24-status"></div>
+      <div id="l24-body" class="l24-body"></div>
+    </section>
+
 <script src="storage.js"></script>
 <script src="framework-data.js"></script>
 <script src="app.js"></script>
+<script src="layer24.js"></script>
+<script src="layer24-ui.js"></script>
 </body>
 </html>

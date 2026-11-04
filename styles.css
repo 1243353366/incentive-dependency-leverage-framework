@@ -236,3 +236,20 @@ mark { background: #ffe9a8; padding: 0 2px; border-radius: 3px; }
 footer { border-top: 1px solid var(--line); background: var(--card); }
 footer p { max-width: 1100px; margin: 0 auto; padding: 18px 20px; font-size: 13px; color: var(--muted); }
 footer a { color: var(--accent); }
+
+/* Layer 24 */
+.l24-head h2 { margin: 0 0 6px; }
+.l24-actions { margin: 10px 0 4px; display: flex; gap: 8px; }
+.l24-status { margin: 12px 0 16px; font-size: 13.5px; }
+.l24-status ul { margin: 6px 0 0 18px; }
+.l24-status li { margin: 3px 0; }
+.l24-flag { color: #a33; }
+.l24-ready { color: #1a7f4b; }
+.l24-body { display: grid; gap: 16px; }
+.l24-section { border: 1px solid var(--line, #e6e6e6); border-radius: 10px; padding: 14px; }
+.l24-section h3 { margin: 0 0 4px; font-size: 15px; }
+.l24-q { margin: 12px 0 0; }
+.l24-q label { display: block; font-size: 13.5px; margin-bottom: 5px; }
+.l24-q textarea { width: 100%; min-height: 62px; font: inherit; padding: 8px; border-radius: 8px; border: 1px solid var(--line, #e6e6e6); }
+.l24-why { margin-top: 6px; }
+.l24-why label { color: var(--muted, #666); font-size: 12.5px; }

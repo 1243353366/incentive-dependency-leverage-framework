@@ -166,5 +166,56 @@
     }));
   }
 
-  return { KINDS, SECTIONS, QUESTIONS, GATE, assess, nextQuestion, operationalPrompts, isAnswered, describe: () => "A conclusion opens only after five alternatives, one disconfirming item and one provenance item. Exposures need a decision attached." };
+  /** Everything the screen needs to say, as data, so it can be tested without a browser. */
+  function formatStatus(assessment) {
+    const lines = [];
+    for (const item of assessment.missing) lines.push({ kind: "missing", text: item });
+    for (const id of assessment.unjustified) {
+      lines.push({ kind: "unjustified", text: QUESTIONS.find((q) => q.id === id).text.split(",")[0] + ": name the decision this would change, or stop collecting it." });
+    }
+    for (const warning of assessment.warnings) lines.push({ kind: "warning", text: warning });
+    return {
+      ready: assessment.ready,
+      headline: assessment.ready
+        ? `Conclusion open. ${assessment.answered} of ${assessment.total} questions answered, with alternatives, disconfirmation and provenance in place.`
+        : `No conclusion yet. ${assessment.missing.length} thing(s) missing, ${assessment.answered} of ${assessment.total} answered.`,
+      lines,
+    };
+  }
+
+  /** A plain-text file a person can keep, hand over, or read a week later. */
+  function exportText(answers, now) {
+    const stamp = now ? new Date(now).toISOString().slice(0, 10) : "";
+    const out = [];
+    out.push("# Actor analysis");
+    out.push("");
+    out.push("Answers below are the analyst's own notes. Unanswered questions are omitted, not guessed.");
+    out.push(stamp ? `Exported ${stamp}.` : "Exported from the browser.");
+    out.push("");
+    const clean = (value) => String(value).replace(/</g, "(").replace(/>/g, ")");
+    for (const section of SECTIONS) {
+      const rows = QUESTIONS.filter((q) => q.section === section.id && isAnswered(answers, q.id));
+      if (!rows.length) continue;
+      out.push(`## ${section.title}`);
+      out.push("");
+      for (const question of rows) {
+        out.push(`**${question.text}**`);
+        out.push(clean(answers[question.id].text || answers[question.id].value).trim());
+        if (question.kind === "operational") {
+          const why = answers["why-" + question.id];
+          out.push(why ? `_Decision affected:_ ${clean(why.text || why.value).trim()}` : "_Decision affected:_ (not stated)");
+        }
+        out.push("");
+      }
+    }
+    const assessment = assess(answers);
+    const status = formatStatus(assessment);
+    out.push("## Gate");
+    out.push("");
+    out.push(status.headline);
+    for (const line of status.lines) out.push(`- ${line.text}`);
+    return `${out.join("\n")}\n`;
+  }
+
+  return { KINDS, SECTIONS, QUESTIONS, GATE, assess, nextQuestion, operationalPrompts, isAnswered, formatStatus, exportText, describe: () => "A conclusion opens only after five alternatives, one disconfirming item and one provenance item. Exposures need a decision attached." };
 });

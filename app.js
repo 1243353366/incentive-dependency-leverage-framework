@@ -170,16 +170,21 @@ function renderLibrary(query) {
 }
 
 /* tabs */
+const VIEWS = ['library', 'coach', 'layer24'];
+
+/**
+ * Data driven so that adding a view is one entry rather than another branch. The old version
+ * was an if/else, which meant a third tab would have silently shown the coach.
+ */
 function switchTab(name) {
+  const target = VIEWS.includes(name) ? name : 'library';
   document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
-  if (name === 'library') {
-    document.getElementById('tab-library').classList.add('active');
-    document.getElementById('view-library').classList.add('active');
-  } else {
-    document.getElementById('tab-coach').classList.add('active');
-    document.getElementById('view-coach').classList.add('active');
-  }
+  const tab = document.getElementById('tab-' + target);
+  if (tab) tab.classList.add('active');
+  const view = document.getElementById('view-' + target);
+  if (view) view.classList.add('active');
+  if (target === 'layer24' && window.IDLFLayer24UI) window.IDLFLayer24UI.show();
 }
 document.getElementById('tab-library').addEventListener('click', () => switchTab('library'));
 document.getElementById('tab-coach').addEventListener('click', () => switchTab('coach'));
