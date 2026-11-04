@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Added
+
+- **`Host it yourself` in the README.** Self-hosting instructions for Cloudflare Pages, Render,
+  Railway, AWS (Amplify, S3, CloudFront) and GitHub Pages, each with the exact configuration this
+  site needs (no build command, repository root) and links to the provider's own documentation.
+  Every link in that section was fetched and checked before it was committed; one Railway
+guide had moved and was replaced rather than left to rot. Also included: what
+  a host can and cannot see, and the fact that adding a backend or a model transfers the
+  obligations of holding someone's data to whoever runs it. The section opens by stating plainly
+  that the author does not host this for anyone, why, and thanks readers for cooperating.
+
 ### Fixed
 
 - **The page was dead, shipped in 240f7b2** (`app.js`). The retention commit bound a control

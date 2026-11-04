@@ -4,6 +4,116 @@
 
 > **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
 
+## Host it yourself
+
+A decision before the instructions.
+
+**I do not host this for you, and that is deliberate rather than an oversight.** A tool that asks
+people to write down their hardest situation, who is involved, and what they are prepared to do
+should not route through one person's account, one person's server, or one person's name. Hosting
+it yourself keeps the responsibility where it belongs, keeps me out of the position of holding
+your visitors' answers, and reduces my own exposure to a risk I am not willing to carry on
+everyone's behalf. **Thank you for cooperating with that.** It is appreciated, and it is why every
+instruction below assumes you own the deployment and the logs.
+
+What it costs you: an account, about ten minutes, and no money. This is a static site. Seven
+files, no build step, no database, no API keys, no secrets to leak.
+
+`index.html` · `styles.css` · `app.js` · `storage.js` · `layer24.js` · `layer24-ui.js` ·
+`framework-data.js`
+
+### The fast path
+
+1. **Fork** this repository to your own account (button, top right, "Fork").
+2. Pick one provider below. Every one of them deploys a static site with **no build command** and
+   the **repository root** as the publish directory. That is the whole configuration.
+3. Open the URL they give you. Then, if you like, point your own domain at it.
+
+### Cloudflare Pages
+
+Free, fastest to a working URL, and the free tier does not meter bandwidth for static sites.
+
+1. Sign in at [pages.cloudflare.com](https://pages.cloudflare.com/).
+2. Workers & Pages → Create → Pages → **Connect to Git**, and authorise your fork.
+3. Framework preset **None**. Build command **empty**. Build output directory **`/`**.
+4. Deploy. You get `https://<project>.pages.dev` in about a minute.
+  Docs: [Cloudflare Pages and Git](https://developers.cloudflare.com/pages/get-started/git-integration/)
+  Docs: [uploading files directly, if you would rather not connect a repo](https://developers.cloudflare.com/pages/get-started/direct-upload/)
+
+### Render
+
+1. Sign in at [render.com](https://render.com/).
+2. **New → Static Site**, connect your fork.
+3. Build command **empty**. Publish directory **`.`**.
+4. Create. You get `https://<name>.onrender.com`.
+  Docs: [Render static sites](https://render.com/docs/static-sites)
+
+### Railway
+
+Railway does not serve static files on its own, so it needs a one-line server. Use this only if you
+already run things there.
+
+1. Sign in at [railway.com](https://railway.com/) and create a project from your fork.
+2. Add a start command: `npx serve -l $PORT .`
+3. Generate a domain under Settings → Networking.
+  Docs: [Railway quick start](https://docs.railway.com/quick-start)
+  Docs: [Railway documentation](https://docs.railway.com/)
+
+### AWS
+
+Three ways, in increasing order of effort. Amplify is the shortest and is what most people want.
+
+- **AWS Amplify Hosting.** Sign in at [console.aws.amazon.com](https://console.aws.amazon.com/console/home), then connect your fork, leave the build command empty, set the base
+  directory to the repository root, deploy.
+  Docs: [Amplify Hosting setup](https://docs.aws.amazon.com/amplify/latest/userguide/getting-started.html)
+- **S3 static website hosting.** Create a bucket, enable static website hosting, set the index
+  document to `index.html`, upload the seven files, set a public read bucket policy.
+  Docs: [S3 static website hosting](https://docs.aws.amazon.com/AmazonS3/latest/userguide/WebsiteHosting.html)
+- **S3 behind CloudFront**, if you want HTTPS on a custom domain and caching.
+  Docs: [creating a CloudFront distribution](https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/GettingStarted.SimpleDistribution.html)
+
+### GitHub Pages
+
+The route this repository already uses, and the one with the fewest moving parts.
+
+1. Fork. Then **Settings → Pages**.
+2. Source: **Deploy from a branch**, branch **main**, folder **`/`**.
+3. Save, wait a minute, load `https://<your-account>.github.io/<repo-name>/`.
+  Docs: [GitHub Pages setup](https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site)
+
+### Running it on your own machine instead
+
+`make serve`, then open `http://localhost:8000`. Serve it over HTTP rather than opening
+`index.html` directly: the page ships a Content Security Policy that expects an origin, and
+`file://` does not reliably provide one.
+
+## What your host can and cannot see
+
+This matters more than the deployment instructions above, so it is written down.
+
+- **They serve seven files, and those files are public by design.** Anyone can read your copy of
+  the framework. That is the point of it.
+- **They cannot see what anyone writes.** Answers live in the visitor's own browser
+  (`localStorage`), are pruned after 90 days, and never leave the device except through the
+  export button. There is no server to send them to.
+- **They do see requests.** IP addresses, user agents and timestamps in ordinary access logs, kept
+  for whatever period their policy says. That is normal hosting, and it is worth telling your
+  visitors in a sentence.
+- **There is no database, no keys and no secrets to breach.** The only thing you can leak is the
+  files themselves.
+- **If you add a model or a backend, all of that changes.** The moment answers travel to a server
+  you run, you become the holder of someone's hardest week, and the obligations that come with
+  that are yours: retention, deletion, access, and a policy you can defend.
+
+## Before you make it public
+
+- `make test` passes. `make audit` output has been read, not just run.
+- You have decided what the retention line in the interface says, and it still matches the
+  constant the code enforces.
+- You are not uploading anyone else's screenshots or records without their permission.
+- You have said, somewhere a visitor can see, that answers stay in their browser.
+
+
 ## Layer 24: actor analysis
 
 The final layer is aimed at a person rather than a decision, so it is the one with a gate:
