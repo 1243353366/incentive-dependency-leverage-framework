@@ -795,3 +795,7 @@ The framework succeeds when it improves the quality of the decision—even when 
 The objective is not maximum leverage. It is **sound judgment, effective action, defensible consequences, and a decision that remains reasonable even when your interpretation is imperfect.**
 
 **Just because I can doesn't mean I should. Power is neutral.**
+
+---
+
+Thanks for reading. More of my work: [github.com/1243353366](https://github.com/1243353366).
