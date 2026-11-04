@@ -4,6 +4,14 @@
 
 > **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
 
+## Where it stands
+
+[`LIVING.md`](LIVING.md) is the current state: what is checked, what has been
+measured (structurally, not empirically), what has not, and which decisions are open.
+`docs/limits.md` says plainly what this framework is and is not, including the failure
+mode it is exposed to. Tests run with `make test`; `make audit` lists interpolations
+that a human should read.
+
 ## Launching the app
 
 ### Option 1 — GitHub Pages (already live)
