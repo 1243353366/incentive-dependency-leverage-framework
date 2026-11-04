@@ -10,6 +10,7 @@ const fs = require("node:fs");
 
 const html = fs.readFileSync("index.html", "utf8");
 const app = fs.readFileSync("app.js", "utf8");
+const app_source = () => app;
 
 describe("the page", () => {
   it("declares a content security policy", () => {
@@ -29,7 +30,30 @@ describe("the page", () => {
   });
 });
 
+describe("session control", () => {
+  it("loads storage before the app that uses it", () => {
+    const storage = html.indexOf("storage.js");
+    const app = html.indexOf("app.js");
+    assert.ok(storage > -1, "index.html must load storage.js");
+    assert.ok(storage < app, "storage.js must load before app.js");
+  });
+
+  it("offers a way to delete everything", () => {
+    assert.match(html, /id=["']btn-clear-all["']/, "there must be a control that clears all sessions");
+    assert.match(app_source(), /function clearAllSessions/, "and code behind it");
+  });
+
+  it("names the retention window in the page, from the same constant", () => {
+    assert.match(html, /id=["']storage-note["']/);
+    assert.match(app_source(), /STORE\.describe\(\)/, "the note is generated, not retyped");
+  });
+});
+
 describe("the code", () => {
+  it("has no hardcoded storage key left behind", () => {
+    assert.equal(/leverage-lens-sessions/.test(app), false, "the legacy key lives in storage.js only");
+  });
+
   it("has no dynamic evaluation", () => {
     assert.equal(/\beval\(|new Function\(/.test(app), false, "eval and new Function are not allowed");
   });

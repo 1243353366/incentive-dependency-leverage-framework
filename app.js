@@ -184,6 +184,10 @@ function switchTab(name) {
 document.getElementById('tab-library').addEventListener('click', () => switchTab('library'));
 document.getElementById('tab-coach').addEventListener('click', () => switchTab('coach'));
 document.getElementById('search-input').addEventListener('input', e => renderLibrary(e.target.value));
+const clearAll = document.getElementById('btn-clear-all');
+if (clearAll) clearAll.addEventListener('click', clearAllSessions);
+const storageNote = document.getElementById('storage-note');
+if (storageNote) storageNote.textContent = STORE.describe();
 
 /* jump from coach to a section */
 function jumpToSection(id) {
@@ -363,7 +367,7 @@ const RE = {
 };
 
 /* ---------- state ---------- */
-const STORE_KEY = 'leverage-lens-sessions';
+const STORE = window.IDLFStorage;
 let sessions = [];
 let session = null;
 
@@ -375,10 +379,30 @@ function qById(id) {
 }
 
 function loadSessions() {
-  try { sessions = JSON.parse(localStorage.getItem(STORE_KEY) || '[]'); }
-  catch { sessions = []; }
+  const loaded = STORE.load(
+    localStorage.getItem(STORE.KEY),
+    localStorage.getItem(STORE.LEGACY_KEY),
+    Date.now(),
+  );
+  sessions = loaded.sessions;
+  if (loaded.migrated) localStorage.removeItem(STORE.LEGACY_KEY);
+  if (loaded.dropped) console.info(`[idlf] dropped ${loaded.dropped} session(s) past the ${STORE.RETENTION_DAYS} day limit`);
 }
-function saveSessions() { localStorage.setItem(STORE_KEY, JSON.stringify(sessions)); }
+function saveSessions() {
+  const saved = STORE.save(sessions, Date.now());
+  sessions = saved.sessions;
+  localStorage.setItem(STORE.KEY, saved.json);
+  if (saved.dropped) console.info(`[idlf] dropped ${saved.dropped} session(s) past the ${STORE.RETENTION_DAYS} day limit`);
+}
+
+function clearAllSessions() {
+  if (!sessions.length) return;
+  if (!confirm('Delete every session saved in this browser? This cannot be undone.')) return;
+  sessions = [];
+  localStorage.removeItem(STORE.KEY);
+  localStorage.removeItem(STORE.LEGACY_KEY);
+  newSession();
+}
 function persist() {
   const i = sessions.findIndex(s => s.id === session.id);
   if (i >= 0) sessions[i] = session; else sessions.push(session);

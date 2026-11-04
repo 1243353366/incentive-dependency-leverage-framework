@@ -12,7 +12,7 @@ If a claim here cannot be checked against the code or the tests in one command, 
 | --- | --- |
 | repository | public, `github.com/1243353366/incentive-dependency-leverage-framework` |
 | product state | static app, live on GitHub Pages, no server, no accounts |
-| storage | sessions in this browser's `localStorage`; nothing is transmitted |
+| storage | versioned key in this browser's `localStorage`, pruned at 90 days, clearable; nothing is transmitted |
 | tests | data invariants, page hygiene, escaping guards (`make test`) |
 | CI | runs the suite and the interpolation audit on every push |
 | premise | "My wins should never create a future problem for me." The framework reasons about leverage; this repository is bound by the same rule it describes. |
@@ -27,11 +27,14 @@ If a claim here cannot be checked against the code or the tests in one command, 
 
 ## Open decisions
 
-- **Retention.** Sessions sit in `localStorage` indefinitely, under one key, with no version
-  and no expiry. Someone's most sensitive situation stays on a shared laptop until they clear
-  their browser. Decide: an explicit clear control, a version tag, or both.
+- **Retention, resolved 2026-11-04.** Sessions now live under `idlf.sessions.v1`, are stamped
+  on save, are dropped after 90 days untouched, and can be cleared in one control. The old key
+  is migrated once and removed. What remains open is the case below.
 - **Frame protection.** `frame-ancestors` cannot be set from a meta tag, so clickjacking
   protection needs a hosting header. GitHub Pages does not allow custom headers.
+- **A browser that is never reopened.** Pruning happens on load and on save, so a session on a
+  machine nobody opens again outlives the window. Fixing that needs a server or a service
+  worker, and both are larger than this app. Stated, not hidden.
 - **Advice posture.** The coach produces a structured report. Whether that reads as analysis
   or as instruction is a product decision, and the safer default is analysis.
 
@@ -47,3 +50,7 @@ If a claim here cannot be checked against the code or the tests in one command, 
 ## Change log of this document
 
 - 2026-11-04 created, alongside the first test suite and the CSP.
+- 2026-11-04 retention bounded: versioned key, 90 day prune, clear-all control, legacy key
+  migrated. Decided against a JavaScript frame-buster: it is trivially bypassed, it breaks
+  legitimate previews, and claiming clickjack protection from it would be worse than naming
+  the gap.

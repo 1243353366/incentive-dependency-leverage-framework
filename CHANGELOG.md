@@ -2,6 +2,20 @@
 
 ## Unreleased
 
+### Changed
+
+- **Session storage is versioned, bounded and clearable** (`storage.js`). Sessions moved to
+  `idlf.sessions.v1`, are stamped with `updated_at` on save, and anything untouched for 90
+  days is dropped on the next load. The old `leverage-lens-sessions` key is read once,
+  migrated, and removed, so nobody loses their work to a rename and nobody keeps a stale copy
+  forever. A "Clear all" control deletes everything, and the retention line in the interface
+  is generated from the same constant the code enforces rather than retyped in the markup.
+  A session with no readable timestamp is treated as expired: unknown age is not a reason to
+  keep someone's hardest week on a shared laptop.
+- **Retention logic is pure and tested** (`tests/storage.test.js`): `now` is passed in, so the
+  window is checked rather than assumed, including the exact boundary day, corrupt storage,
+  and the migrate-once path.
+
 ### Added
 
 - **Test suite** (`tests/`): framework data invariants (addressable sections, unique ids,
