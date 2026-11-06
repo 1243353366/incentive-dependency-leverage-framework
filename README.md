@@ -4,6 +4,8 @@
 
 > **Try the interactive app:** <https://1243353366.github.io/incentive-dependency-leverage-framework/> — a searchable library of the full framework plus a decision coach that asks adaptive follow-up questions (evidence, incentives, dependencies, leverage, mirror test, theory testing) and produces a structured situation report with flags and stopping conditions. Runs entirely in your browser; sessions stay on your device.
 
+Two companion documents: the limits this framework is bound by are in [docs/limits.md](docs/limits.md), and the mechanics of a group trapping itself, with the confidence marks and the boundary questions, are in [docs/influence-cascades.md](docs/influence-cascades.md).
+
 ## Host it yourself
 
 A decision before the instructions.
